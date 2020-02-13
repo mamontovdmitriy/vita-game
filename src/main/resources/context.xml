@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="ru.relex"/>
+
+    <!-- Карты перемещений игроков -->
+    <bean id="movesCatchPlayer" class="ru.relex.movelist.CatchPlayerMoveList"/>
+    <bean id="movesEscapePlayer" class="ru.relex.movelist.EscapePlayerMoveList"/>
+
+    <!-- Игроки -->
+    <bean id="catchPlayer" class="ru.relex.player.Player">
+        <constructor-arg name="moveList" ref="movesCatchPlayer"/>
+        <constructor-arg name="positions">
+            <list>
+                <value>7</value>
+                <value>9</value>
+                <value>10</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="icon" value="X"/>
+        <constructor-arg name="name" value="Player 1"/>
+    </bean>
+    <bean id="escapePlayer" class="ru.relex.player.Player">
+        <constructor-arg name="moveList" ref="movesEscapePlayer"/>
+        <constructor-arg name="positions">
+            <list>
+                <value>5</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg name="icon" value="*"/>
+        <constructor-arg name="name" value="Player 2"/>
+    </bean>
+
+    <!-- Управление игроками -->
+    <bean id="playerManager" class="ru.relex.player.PlayerManager">
+        <constructor-arg name="catchPlayer" ref="catchPlayer"/>
+        <constructor-arg name="escapePlayer" ref="escapePlayer"/>
+    </bean>
+
+    <!-- Правила игры, основная логика -->
+    <bean id="rules" class="ru.relex.game.GameRules">
+        <constructor-arg name="playerManager" ref="playerManager"/>
+    </bean>
+
+    <!-- -->
+    <bean id="consoleRenderer" class="ru.relex.console.ConsoleRenderer"/>
+
+    <bean id="game" class="ru.relex.game.Game">
+        <constructor-arg name="consoleRenderer" ref="consoleRenderer"/>
+        <constructor-arg name="rules" ref="rules"/>
+    </bean>
+</beans>
