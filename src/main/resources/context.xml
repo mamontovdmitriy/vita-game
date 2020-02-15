@@ -48,11 +48,32 @@
         <constructor-arg name="playerManager" ref="playerManager"/>
     </bean>
 
-    <!-- -->
+    <!-- Отрисовка пользовательского интерфейса на консоли -->
     <bean id="consoleRenderer" class="ru.relex.console.ConsoleRenderer"/>
 
-    <bean id="game" class="ru.relex.game.Game">
+    <!-- Репозитории  -->
+<!--    <bean id="gameRepository" class="ru.relex.db.Repository.GameRepository"/>-->
+<!--    <bean id="moveRepository" class="ru.relex.db.Repository.MoveRepository"/>-->
+
+    <!-- Хранилище (Репозитории, что в аргументах конструктора создаются автоматически)  -->
+    <bean id="gameStore" class="ru.relex.db.GameStore">
+        <constructor-arg name="gameRepository" ref="gameRepository"/>
+        <constructor-arg name="moveRepository" ref="moveRepository"/>
+    </bean>
+
+    <!-- Игра -->
+    <bean id="game" class="ru.relex.game.GameMain">
         <constructor-arg name="consoleRenderer" ref="consoleRenderer"/>
         <constructor-arg name="rules" ref="rules"/>
+        <constructor-arg name="gameStore" ref="gameStore"/>
     </bean>
+
+    <!-- Команды меню -->
+    <bean id="commandNewGame" class="ru.relex.menu.NewGameCommand">
+        <constructor-arg name="consoleRenderer" ref="consoleRenderer"/>
+        <constructor-arg name="rules" ref="rules"/>
+        <constructor-arg name="gameStore" ref="gameStore"/>
+    </bean>
+    <bean id="commandLoadGame" class="ru.relex.menu.LoadGameCommand"/>
+    <bean id="commandExit" class="ru.relex.menu.ExitCommand"/>
 </beans>

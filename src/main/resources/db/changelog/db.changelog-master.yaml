@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: mamontovdmitriy
+      comment: Create games and moves
+      changes:
+        - sqlFile:
+            path: changesets/changeset_1.sql
+            relativeToChangelogFile: true

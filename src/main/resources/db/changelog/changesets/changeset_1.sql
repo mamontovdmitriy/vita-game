@@ -1,0 +1,13 @@
+CREATE TABLE `games` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`created_at`	NUMERIC
+);
+CREATE TABLE `moves` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`created_at`	NUMERIC NOT NULL,
+	`number`	INTEGER NOT NULL,
+	`player`	INTEGER NOT NULL,
+	`position`	INTEGER NOT NULL,
+	`game_id`	INTEGER NOT NULL,
+	FOREIGN KEY(`game_id`) REFERENCES games (id)
+);

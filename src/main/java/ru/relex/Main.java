@@ -1,14 +1,25 @@
 package ru.relex;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.relex.game.Game;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ImportResource;
+import ru.relex.menu.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@SpringBootApplication
+@ImportResource(value = "classpath:context.xml")
 public class Main {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+        ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
 
-        Game game = context.getBean(Game.class);
+        List<MenuItem> menuItems = new ArrayList<>();
+        menuItems.add(new MenuItem("1", "New game", context.getBean(NewGameCommand.class)));
+        menuItems.add(new MenuItem("2", "Load game", context.getBean(LoadGameCommand.class)));
+        menuItems.add(new MenuItem("3", "Exit", context.getBean(ExitCommand.class)));
 
-        game.start();
+        new MainMenu(menuItems).show();
     }
 }
