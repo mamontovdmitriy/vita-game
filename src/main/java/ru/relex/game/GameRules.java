@@ -18,6 +18,15 @@ public class GameRules {
      */
     public GameRules(PlayerManager playerManager) {
         this.playerManager = playerManager;
+        this.winner = null;
+    }
+
+    /**
+     * Восстановление первоначального состояния
+     */
+    public void init() {
+        playerManager.init();
+        winner = null;
     }
 
     /**

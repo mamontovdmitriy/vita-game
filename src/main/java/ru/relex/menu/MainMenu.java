@@ -13,12 +13,17 @@ public class MainMenu {
         this.menuItems = menuItems;
     }
 
+    /**
+     * Главное меню
+     */
     public void show() {
-        render();
+        while (true) {
+            render();
 
-        String alias = ConsoleInput.getCommand("Your choice", allowedCommand());
+            String alias = ConsoleInput.getCommand("Your choice", allowedCommand());
 
-        getCurrentMenuItem(alias).getCommand().start();
+            getCurrentMenuItem(alias).getCommand().start();
+        }
     }
 
     private Collection<String> allowedCommand() {
@@ -33,6 +38,7 @@ public class MainMenu {
     }
 
     private void render() {
+        System.out.println("\n-= Main menu =-");
         for (MenuItem item : menuItems) {
             System.out.printf("%s - %s\n", item.getAlias(), item.getLabel());
         }

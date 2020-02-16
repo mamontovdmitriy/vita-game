@@ -6,6 +6,6 @@ import ru.relex.db.Entity.Move;
 
 import java.util.List;
 
-public interface MoveRepository extends CrudRepository<Move, Long> {
+public interface MoveRepository extends CrudRepository<Move, Integer> {
     List<Move> findByGameOrderByCreatedAtAsc(Game game);
 }

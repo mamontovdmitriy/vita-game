@@ -2,6 +2,7 @@ package ru.relex.player;
 
 import ru.relex.movelist.MoveList;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class Player {
      * Возможные ходы игрока
      */
     private MoveList moveList;
+    /**
+     * Копия позиций для восстановления первоначального состояния
+     */
+    private List<Integer> defaultPositions;
 
     /**
      * @param moveList карта возможныхы перемещений игрока по всему полю
@@ -32,6 +37,15 @@ public class Player {
         this.positions = positions;
         this.icon = icon;
         this.name = name;
+
+        this.defaultPositions = new ArrayList<>(positions);
+    }
+
+    /**
+     * Восстановление первоначального состояния
+     */
+    public void init() {
+        positions = new ArrayList<>(defaultPositions);
     }
 
     public String getIcon() {

@@ -68,12 +68,19 @@
         <constructor-arg name="gameStore" ref="gameStore"/>
     </bean>
 
+    <!-- Провтор игры -->
+    <bean id="gameReplay" class="ru.relex.game.GameReplay"/>
+
     <!-- Команды меню -->
     <bean id="commandNewGame" class="ru.relex.menu.NewGameCommand">
         <constructor-arg name="consoleRenderer" ref="consoleRenderer"/>
         <constructor-arg name="rules" ref="rules"/>
         <constructor-arg name="gameStore" ref="gameStore"/>
     </bean>
-    <bean id="commandLoadGame" class="ru.relex.menu.LoadGameCommand"/>
+    <bean id="commandLoadGame" class="ru.relex.menu.LoadGameCommand">
+        <constructor-arg name="gameRepository" ref="gameRepository"/>
+        <constructor-arg name="consoleRenderer" ref="consoleRenderer"/>
+        <constructor-arg name="gameReplay" ref="gameReplay"/>
+    </bean>
     <bean id="commandExit" class="ru.relex.menu.ExitCommand"/>
 </beans>

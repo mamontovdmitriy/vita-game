@@ -5,6 +5,6 @@ import ru.relex.db.Entity.Game;
 
 import java.util.List;
 
-public interface GameRepository extends CrudRepository<Game, Long> {
+public interface GameRepository extends CrudRepository<Game, Integer> {
     List<Game> findByOrderByCreatedAtAsc();
 }

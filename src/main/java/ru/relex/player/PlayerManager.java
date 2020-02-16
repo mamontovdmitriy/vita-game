@@ -24,6 +24,16 @@ public class PlayerManager {
     }
 
     /**
+     * Восстановление первоначального состояния
+     */
+    public void init() {
+        catchPlayer.init();
+        escapePlayer.init();
+        players = Arrays.asList(catchPlayer, escapePlayer);
+        activePlayer = catchPlayer;
+    }
+
+    /**
      * @return Догоняющий игрок
      */
     public Player getCatchPlayer() {

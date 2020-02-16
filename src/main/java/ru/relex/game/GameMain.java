@@ -33,6 +33,7 @@ public class GameMain {
         int moveNumber = 1;
         Game game = gameStore.createSavedGame();
 
+        gameRules.init();
         renderer.renderRules();
 
         while (true) {

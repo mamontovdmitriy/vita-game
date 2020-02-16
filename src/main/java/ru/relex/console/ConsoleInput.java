@@ -10,7 +10,8 @@ import java.util.Collection;
 public class ConsoleInput {
     /**
      * Получение команды от пользователя
-     * @param message текст сообщения, поясняющий ввод
+     *
+     * @param message         текст сообщения, поясняющий ввод
      * @param allowedCommands допустимые команды
      * @return строковое представление введенной пользоветелем команды
      */
@@ -19,13 +20,15 @@ public class ConsoleInput {
 
         while (true) {
             System.out.print(message);
-            System.out.print(allowedCommands);
-            System.out.print(": ");
+            if (!allowedCommands.isEmpty()) {
+                System.out.print(allowedCommands);
+                System.out.print(": ");
+            }
 
             try {
                 String line = br.readLine();
 
-                if (!allowedCommands.contains(line)) {
+                if (!allowedCommands.isEmpty() && !allowedCommands.contains(line)) {
                     throw new Exception("Unknown command!");
                 }
 
